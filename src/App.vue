@@ -2,6 +2,7 @@
   <div id="app">
     Hello World!
     {{ testData }}
+    Updated Vue File
   </div>
 </template>
 
