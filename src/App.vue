@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    Hello World!
-    {{ testData }}
-    Updated Vue File
+    Hello World! <br>
+    {{ testData }} <br>
+    Last Test
   </div>
 </template>
 
