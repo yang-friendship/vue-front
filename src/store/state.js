@@ -1,12 +1,13 @@
 const state = {
+  user : {
+    id:null,
+    username:'',
+    role:null,
+    email:null,
+  },
   token: null,
-  isAddBoard: false,
   boards: [],
   board: {},
-  card: {},
-  bodyColor: '#ffffff',
-  navbarColor: '#026aa7',
-  isShowBoardSettings : false
 }
 
 export default state

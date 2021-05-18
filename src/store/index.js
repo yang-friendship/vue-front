@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as api from '../api'
-import axios from "axios";
 import state from "./state";
 import getters from "./getters";
 import mutations from "./mutations";

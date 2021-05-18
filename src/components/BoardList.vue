@@ -1,12 +1,12 @@
 <template>
   <div>
-    Login Page
+    Board List
   </div>
 </template>
 
 <script>
 export default {
-  name: "Login"
+  name: "BoardList"
 }
 </script>
 

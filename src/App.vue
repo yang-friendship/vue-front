@@ -1,13 +1,18 @@
 <template>
   <div id="app">
-    Hello World! <br>
-    {{ testData }} <br>
-    Last Test
+      <header>
+      <Navbar />
+      </header>
+    <div class="container">
+    <router-view></router-view>
+    </div>
+
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Navbar from "./components/Navbar";
 export default {
 
   name: 'App',
@@ -20,6 +25,7 @@ export default {
     this.sendApi()
   },
   components: {
+    Navbar
   },
   methods : {
     sendApi() {
@@ -37,5 +43,12 @@ export default {
 </script>
 
 <style>
+
+.container {
+  width: 1240px;
+  margin: 0 auto;
+  border: 5px solid;
+  height: 100%;
+}
 
 </style>
