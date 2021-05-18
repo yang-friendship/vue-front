@@ -4,39 +4,41 @@ import Login from "../components/Login";
 import Home from "../components/Home";
 import MyPage from "../components/MyPage";
 import SignUp from "../components/SignUp";
-import BoardList from "../components/BoardList";
+import store from '../store'
+import ArticleList from "../components/ArticleList";
 
 Vue.use(VueRouter)
+
+const requireAuth = (to, from, next) => {
+  const loginPath = `/login?rPath=${encodeURIComponent(to.path)}`
+  store.getters.isLogin ? next() : next(loginPath)
+}
 
 const router = new VueRouter({
   mode: 'history',
   routes: [
     {
-      path : '/',
-      component : Home
+      path: '/',
+      component: Home
     },
     {
-      path : '/login',
-      component : Login
+      path: '/login',
+      component: Login,
     },
     {
-      path : '/sign-up',
-      component : SignUp
+      path: '/sign-up',
+      component: SignUp
     },
     {
-      path : '/accounts/:aid',
-      component : MyPage
+      path: '/accounts/:aid',
+      component: MyPage,
+      beforeEnter: requireAuth
     },
     {
-      path : '/boards/:bid:',
-      component : BoardList
+      path: '/articles',
+      component: ArticleList
     }
 
-
-    // {
-    //   path: '*',
-    //   component: NotFound
-    // }
   ]
 })
 

@@ -12,7 +12,10 @@ const form = {
   },
   password(input) {
     const rex = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-    console.log(input);
+    return validator(rex, input)
+  },
+  mobile(input) {
+    const rex = /01[016789]-[^0][0-9]{2,3}-[0-9]{3,4}/;
     return validator(rex, input)
   },
   confirm(target, confirm) {
@@ -20,6 +23,18 @@ const form = {
       return false;
     }
     return true;
+  },
+  username(input) { // TODO REX
+    if(input.length > 1 && input.length < 5) {
+      return true;
+    }
+    return false;
+  },
+  nickname(input) {
+    if(input.length > 2 && input.length < 15) {
+      return true;
+    }
+    return false
   }
 }
 

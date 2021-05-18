@@ -3,8 +3,8 @@
     <form>
       <div>
         <label for="email">Email</label>
-        <input type="email" @keyup="validateEmail" name="email" v-model="email">
-        <button @click.prevent="checkDuplicate">중복체크</button>
+        <input type="email" name="email" v-model="email">
+        <button @click.prevent="checkEmail">중복체크</button>
       </div>
       <div>
         <label for="password">Password</label>
@@ -18,13 +18,32 @@
       </div>
 
       <div>
-        <label for="name">Name</label>
-        <input type="text" name="name">
+        <label for="nickname">Username</label>
+        <input type="text" name="nickname" v-model="username" @keyup="validateUsername">
+      </div>
+
+      <div>
+        <label for="nickname">Nickname</label>
+        <input type="text" name="nickname" v-model="nickname" @keyup="validateNickName">
       </div>
 
       <div>
         <label for="mobile">Mobile</label>
         <input type="tel" name="mobile" @keyup="validateMobile" v-model="mobile">
+      </div>
+      <div>
+        <div>
+          <label for="mobile_notification">mobile_notification</label>
+          <input type="checkbox" name="mobile_notification"  v-model="mobile_notification">
+        </div>
+        <div>
+          <label for="web_notification">web_notification</label>
+          <input type="checkbox" name="web_notification"  v-model="web_notification">
+        </div>
+        <div>
+          <label for="email_notification">email_notification</label>
+          <input type="checkbox" name="email_notification"  v-model="email_notification">
+        </div>
       </div>
       <button @click.prevent="signUp">회원가입</button>
     </form>
@@ -33,63 +52,97 @@
 
 <script>
 import form from '../utils/Validator'
+import * as api from "../api/api";
 
 export default {
   name: "SignUp",
   data() {
     return {
+      test: '',
       email: '',
       password: '',
+      nickname: '',
       confirmPassword: '',
       username: '',
       mobile: '',
+      web_notification:false,
+      mobile_notification:false,
+      email_notification:false,
       validateResult: {
         email: false,
         password: false,
         confirmPassword: false,
         username: false,
+        nickname: false,
         mobile: false,
       }
     }
   },
   methods: {
     signUp() {
-      let entries = this.validateResult.entries;
-      console.log(entries);
+      console.log(this.validateResult);
     },
     validateEmail() {
+      this.validateResult.email = false;
       if (!form.email(this.email)) {
-        console.log('Invalid');
         return;
       }
-      console.log('Valid~~');
     },
     validatePassword() {
+      this.validateResult.password = false;
       if (!form.password(this.password)) {
         console.log('Invalid Password');
         return
       }
-      console.log("OKOk");
+      this.validateResult.password = true;
       return true;
     },
-    validateMobile() {
-      var patternMobile = /01[016789]-[^0][0-9]{2,3}-[0-9]{3,4}/;
-      if (this.mobile.length < 10 || patternMobile.test(this.mobile)) {
-        console.log('Invalid Mobile Number!');
+    validateConfirm() {
+      this.validateResult.confirmPassword = false;
+      if (!form.confirm(this.password, this.confirmPassword)) {
         return
       }
+      this.validateResult.confirmPassword = true
+    },
+    validateMobile() {
+      if (!form.mobile(this.mobile)) {
+        return;
+      }
+      this.validateResult.mobile = true;
       console.log('Valid Mobile Number~');
     },
-    validateConfirm(){
-      if(!form.confirm(this.password,this.confirmPassword)){
-        console.log('Password is not same');
+    validateUsername() {
+      if (!form.username(this.username)) {
+        return;
       }
-      console.log('Password is same');
+      console.log('username is valid');
+      this.validateResult.username = true;
     },
-    checkDuplicate() {
-      /* api 이메일 중복확인*/
+    validateNickName() {
+      if (!form.nickname(this.nickname)) {
+        return;
+      }
+      this.validateResult.nickname = true;
+    },
+    checkEmail() {
+      console.log('checkEmail');
+      if (this.validateEmail()) {
+        return;
+      }
+      api.check.email(this.email)
+      .then(res => {
+        if(!res.isDuplicated) {
+          this.validateResult.email = true
+          console.log(this.validateResult.email);
+          console.log('valid Email');
+          return
+        }
+        console.log("Duplicated~");
+        this.validateResult.email = false
+      });
     }
   }
+
 }
 </script>
 

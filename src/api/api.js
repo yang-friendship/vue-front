@@ -1,7 +1,8 @@
 import axios from 'axios'
+import state from "../store/state";
 
-const DOMAIN = 'http://localhost:3000'
-const UNAUTHORIZED = 401
+const DOMAIN = 'http://www.negyahu.ga'
+// const DOMAIN = 'http://localhost:8001'
 
 const request = (method, url, data) => {
   return axios({
@@ -11,55 +12,40 @@ const request = (method, url, data) => {
   }).then(result => result.data);
 }
 
+export const login = ({email, password}) => request('post', '/api/login',
+    {email: email, password: password});
+
+export const security = {
+
+  login({email, password}) {
+   return  request('post', '/api/login',
+        {email: email, password: password})
+  },
+  logout(){
+    state.token = null
+    delete localStorage.token
+    setAuthInHeader(null)
+  }
+}
+
+export const check = {
+  email(email) {
+    return request('get', `/api/check-email?email=${email}`, {})
+  },
+  nickname(nickname) {
+    return request('get', '/api/login-nickname', {nickname: nickname})
+  }
+}
+
+export const account = {
+  checkEmail(email) {
+    return request('get', '/check/email', {email: email})
+  }
+}
+
 export const setAuthInHeader = token => {
-  axios.defaults.headers.common['Authorization'] = token ? `Bearer ${token}` : null;
-}
-
-export const board = {
-  fetch(id) {
-    return id ? request('get', `/boards/${id}`) :request('get', '/boards')
-  },
-  create(title) {
-    return request('post', '/boards', {title})
-  },
-  destroy(id){
-    return request('delete',`/boards/${id}`,{id})
-  },
-  update(id, payload) {
-    return request('put',`/boards/${id}`,payload)
-  }
-}
-export const auth = {
-  login(email, password) {
-    return request('post', '/login', {email, password})
-  }
-}
-
-export const card = {
-
-  create(title, listId,pos) {
-    return request('post','/cards',{title,listId,pos})
-  },
-  fetch(id) {
-    return request('get',`/cards/${id}`)
-  },
-  update(id, payload) {
-    return request('put' , `/cards/${id}`, payload)
-  },
-  destroy(id) {
-    return request('delete', `/cards/${id}`)
-  }
-}
-
-export const list = {
-
-  create(payload) {
-    return request('post','/lists', payload)
-  },
-  update(id,payload) {
-    return request('put' , `/lists/${id}`, payload)
-  }
-
+  axios.defaults.headers.common['Authorization'] = token ? `Bearer ${token}`
+      : null;
 }
 
 

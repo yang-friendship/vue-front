@@ -1,12 +1,12 @@
 <template>
-  <div>
-    Board List
-  </div>
+ <div>
+   Article List
+ </div>
 </template>
 
 <script>
 export default {
-  name: "BoardList"
+  name: "ArticleList"
 }
 </script>
 
