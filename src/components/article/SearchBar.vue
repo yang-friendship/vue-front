@@ -50,7 +50,6 @@ export default {
       this.$router.push(`/articles?type=${this.type}&keyword=${this.keyword}`);
     },
     getParams() {
-      const params  = '';
 
     }
   }
