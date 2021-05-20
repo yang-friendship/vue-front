@@ -46,6 +46,9 @@ export default {
         console.log(`redirectUrl: ${redirectUrl}`);
         this.$router.push(`${redirectUrl}`)
       })
+      .catch(err => {
+        console.error(err)
+      })
     }
   }
 }

@@ -5,7 +5,9 @@ import Home from "../components/Home";
 import MyPage from "../components/MyPage";
 import SignUp from "../components/SignUp";
 import store from '../store'
-import ArticleList from "../components/ArticleList";
+import ArticleList from "../components/article/ArticleList";
+import ArticleRegister from "../components/article/ArticleRegister";
+import Article from "../components/article/Article";
 
 Vue.use(VueRouter)
 
@@ -27,7 +29,7 @@ const router = new VueRouter({
     },
     {
       path: '/sign-up',
-      component: SignUp
+      component: SignUp,
     },
     {
       path: '/accounts/:aid',
@@ -36,7 +38,16 @@ const router = new VueRouter({
     },
     {
       path: '/articles',
-      component: ArticleList
+      component: ArticleList,
+    },
+    {
+      path : '/articles/register',
+      component :ArticleRegister,
+      beforeEnter: requireAuth
+    },
+    {
+      path : '/articles/:aid',
+      component : Article
     }
 
   ]

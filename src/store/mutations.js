@@ -3,6 +3,8 @@ import axios from "axios";
 
 const mutations = {
   SET_LOGIN_RESULT(state, token) {
+    console.log("setLoginResult:"+ token);
+
     if(!token) return;
     console.log(token);
     let decoded = jwt_decode(token);
@@ -15,7 +17,15 @@ const mutations = {
 
     localStorage.setItem('token', token);
     axios.defaults.headers.common['Authorization'] = token ? token : null;
+  },
+
+  SET_ARTICLE(state, article) {
+    state.article = article;
+  },
+  SET_ARTICLES(state, articles) {
+    state.articles = articles
   }
+
 }
 
 export default mutations

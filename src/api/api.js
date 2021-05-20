@@ -1,15 +1,19 @@
 import axios from 'axios'
 import state from "../store/state";
+// const DOMAIN = 'http://www.negyahu.ga'
+const DOMAIN = 'http://localhost:8001'
 
-const DOMAIN = 'http://www.negyahu.ga'
-// const DOMAIN = 'http://localhost:8001'
 
 const request = (method, url, data) => {
   return axios({
     method,
     url: DOMAIN + url,
-    data
-  }).then(result => result.data);
+    data,
+    // header : {
+    //   'Access-Control-Allow-Origin': '*',
+    //   'Content-Type': 'application/json'
+    // }
+  });
 }
 
 export const login = ({email, password}) => request('post', '/api/login',
@@ -48,4 +52,26 @@ export const setAuthInHeader = token => {
       : null;
 }
 
+export const article = {
+
+  REGISTER(article) {
+    return request('post', '/api/articles'
+        , article)
+  },
+  FETCH(id){
+    return request('get', `/api/articles/${id}`)
+  },
+  FETCH_LIST(query){
+    return request('get',`/api/articles?type=${query.type}&keyword=${query.keyword}`)
+  },
+  DELETE(id){
+    return request('delete', `/api/articles/${id}`);
+  },
+}
+
+export const reply = {
+  REGISTER(id,reply) {
+    return request('post', `/api/articles/${id}/replay`,{ reply})
+  }
+}
 

@@ -6,6 +6,8 @@ const state = {
     nickname:null
   },
   token: null,
+  article : null,
+  articles : []
 }
 
 export default state

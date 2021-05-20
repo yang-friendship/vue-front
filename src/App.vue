@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import Navbar from "./components/Navbar";
 export default {
 
@@ -21,24 +20,9 @@ export default {
       testData : {}
     }
   },
-  created() {
-    this.sendApi()
-  },
   components: {
     Navbar
   },
-  methods : {
-    sendApi() {
-      axios.request('http://localhost:8001/test')
-      .then(res => {
-        this.testData = res.data
-        console.log(res.data);
-      })
-      .catch( e => {
-        console.log(e);
-      })
-    }
-  }
 }
 </script>
 
