@@ -1,9 +1,22 @@
 <template>
   <div>
-    Article Details Page <br>
     <div>
-      {{ article }}
+      <div>
+        <span>{{article.title}}</span> ||
+        <span>{{article.register_date_time}}</span> ||
+        <span>{{article.update_date_time}}</span> ||
+        <span>{{article.writer.nickname}}</span> ||
+        <span>{{article.view_count}}</span> ||
+        <span>{{article.like_count}}</span> ||
+      </div>
+      <div>
+        <span>{{article.content}}</span>
+      </div>
     </div>
+    <ReplyList :replies="this.article.replies">
+
+    </ReplyList>
+
     <div v-if="isOwner()">
       <button>
         <router-link :to="`/article/edit/${article.id}/`">Update</router-link>
@@ -12,20 +25,19 @@
         Delete
       </button>
     </div>
-
-    <Reply></Reply>
-
+    <AddReply />
 
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import Reply from "./Reply";
+import ReplyList from "./ReplyList";
+import AddReply from "./AddReply";
 
 export default {
   name: "Article",
-  components: {Reply},
+  components: {AddReply, ReplyList},
   data() {
     return {
       article: null

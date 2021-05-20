@@ -18,7 +18,7 @@ const actions = {
   GET_ARTICLES({commit}, query) {
     return api.article.FETCH_LIST(query)
         .then(res => {
-          commit('SET_ARTICLES', res.data.content)
+          commit('SET_ARTICLES', res.data)
         });
   },
   REGISTER_REPLY({commit}, id,reply) {

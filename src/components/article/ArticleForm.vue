@@ -41,7 +41,7 @@ export default {
       this.REGISTER_ARTICLE(
           {title: this.title, content: this.content, file_numbers: this.fileNumbers})
           .then(res => {
-            this.$router.push(`/api/articles/${res.id}`)
+            this.$router.push(`/articles/${res.id}`)
           })
     }
   }

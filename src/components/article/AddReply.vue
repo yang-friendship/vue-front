@@ -4,10 +4,6 @@
       <input name="content">
       <input type="submit" value="댓글달기">
     </form>
-
-    <ul v-for="reply in this.$props.replies" :key="reply.id">
-      <li>{{ reply }}</li>
-    </ul>
   </div>
 </template>
 
@@ -16,11 +12,9 @@
 import {mapActions} from "vuex";
 
 export default {
-  name: "Reply",
-  props: ['replies'],
+  name: "AddReply",
   methods : {
     ...mapActions([
-
     ])
   }
 }

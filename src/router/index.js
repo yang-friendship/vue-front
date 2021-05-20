@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from "../components/Login";
+import Login from "../components/login/Login";
 import Home from "../components/Home";
 import MyPage from "../components/MyPage";
 import SignUp from "../components/SignUp";
@@ -8,6 +8,8 @@ import store from '../store'
 import ArticleList from "../components/article/ArticleList";
 import ArticleRegister from "../components/article/ArticleRegister";
 import Article from "../components/article/Article";
+import ForgotEmail from "../components/login/ForgotEmail";
+import ForgotPassword from "../components/login/ForgotPassword";
 
 Vue.use(VueRouter)
 
@@ -48,8 +50,15 @@ const router = new VueRouter({
     {
       path : '/articles/:aid',
       component : Article
+    },
+    {
+      path : '/forgot-email',
+      component : ForgotEmail
+    },
+    {
+      path : '/forgot-password',
+      component : ForgotPassword
     }
-
   ]
 })
 

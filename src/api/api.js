@@ -9,10 +9,6 @@ const request = (method, url, data) => {
     method,
     url: DOMAIN + url,
     data,
-    // header : {
-    //   'Access-Control-Allow-Origin': '*',
-    //   'Content-Type': 'application/json'
-    // }
   });
 }
 

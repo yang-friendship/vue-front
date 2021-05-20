@@ -11,14 +11,17 @@
       </div>
       <input type="submit" @click.prevent="sendLoginForm">
     </form>
+    <Forgot></Forgot>
   </div>
 </template>
 
 <script>
 import {mapActions, mapMutations, mapState} from "vuex";
+import Forgot from "./Forgot";
 
 export default {
   name: "Login",
+  components: {Forgot},
   computed : {
     ...mapState(['user'])
   },
