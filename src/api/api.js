@@ -1,7 +1,7 @@
 import axios from 'axios'
 import state from "../store/state";
-// const DOMAIN = 'http://www.negyahu.ga'
-const DOMAIN = 'http://localhost:8001'
+const DOMAIN = 'http://www.negyahu.ga'
+// const DOMAIN = 'http://localhost:8001'
 
 
 const request = (method, url, data) => {
