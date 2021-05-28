@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from "../components/login/Login";
 import Home from "../components/Home";
-import MyPage from "../components/MyPage";
+import MyPage from "../components/account/Account";
 import SignUp from "../components/SignUp";
 import store from '../store'
 import ArticleList from "../components/article/ArticleList";

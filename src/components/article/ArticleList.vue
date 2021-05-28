@@ -1,26 +1,30 @@
 <template>
   <div>
     <SearchBar @click="GET_ARTICLES"/>
-    <ul v-if="articles">
+    <ul v-if="articles.content && articles.content.length !==0">
       <li v-for="article in articles.content" :key="article.id">
         <router-link :to="`/articles/${article.id}`">{{ article.title }}</router-link>
-        <router-link :to="`/accounts/${article.writer.id}`">{{ article.writer.nickname }}</router-link>
+        <router-link :to="`/accounts/${article.writer.id}`">{{
+            article.writer.nickname
+          }}
+        </router-link>
       </li>
     </ul>
     <div v-else>
       <span>아무것도 없네요</span>
     </div>
-  <Pageable :pageable="this.articles.pageable"></Pageable>
+    <Pageable></Pageable>
   </div>
 </template>
 
 <script>
 import {mapActions, mapState} from "vuex";
 import SearchBar from "./SearchBar";
+import Pageable from "../common/Pageable";
 
 export default {
   name: "ArticleList",
-  components: {SearchBar},
+  components: {SearchBar, Pageable},
   data() {
     return {}
   },

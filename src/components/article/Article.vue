@@ -2,7 +2,7 @@
   <div>
     <div>
       <div>
-        <span>{{article.title}}</span> ||
+        <span>title: {{article.title}}</span> ||
         <span>{{article.register_date_time}}</span> ||
         <span>{{article.update_date_time}}</span> ||
         <span>{{article.writer.nickname}}</span> ||
@@ -14,7 +14,6 @@
       </div>
     </div>
     <ReplyList :replies="this.article.replies">
-
     </ReplyList>
 
     <div v-if="isOwner()">
@@ -25,19 +24,17 @@
         Delete
       </button>
     </div>
-    <AddReply />
 
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import ReplyList from "./ReplyList";
-import AddReply from "./AddReply";
+import ReplyList from "../reply/ReplyList";
 
 export default {
   name: "Article",
-  components: {AddReply, ReplyList},
+  components: {ReplyList},
   data() {
     return {
       article: null

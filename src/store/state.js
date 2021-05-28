@@ -7,7 +7,8 @@ const state = {
   },
   token: null,
   article : null,
-  articles : []
+  articles : [],
+  account:null
 }
 
 export default state

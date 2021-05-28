@@ -12,20 +12,27 @@ const actions = {
   REGISTER_ARTICLE(_, article) {
     return api.article.REGISTER(article)
   },
-  GET_ARTICLE(_, id){
+  GET_ARTICLE(_, id) {
     return api.article.FETCH(id);
   },
   GET_ARTICLES({commit}, query) {
     return api.article.FETCH_LIST(query)
-        .then(res => {
-          commit('SET_ARTICLES', res.data)
-        });
+    .then(res => {
+      commit('SET_ARTICLES', res.data)
+    });
   },
-  REGISTER_REPLY({commit}, id,reply) {
-    return api.reply.REGISTER(id,reply)
+  REGISTER_REPLY({commit}, id, reply) {
+    return api.reply.REGISTER(id, reply)
     .then(() => {
       commit('')
     });
+  },
+  GET_ACCOUNT({commit}, id) {
+    return api.account.fetch(id)
+    .then((res) => {
+      console.log(res.data);
+      commit('SET_ACCOUNT', res.data)
+    })
   }
 }
 

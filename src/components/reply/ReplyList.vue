@@ -21,16 +21,17 @@
             <td>{{reply.register_date_time}}</td>
           </tr>
         </template>
-
       </template>
     </table>
-
+    <AddReply />
   </div>
 </template>
 
 <script>
+import AddReply from "./AddReply";
 export default {
   name: "ReplyList",
+  components: {AddReply},
   props:['replies']
 }
 </script>

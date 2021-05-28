@@ -24,6 +24,9 @@ const mutations = {
   },
   SET_ARTICLES(state, articles) {
     state.articles = articles
+  },
+  SET_ACCOUNT(state, account) {
+    state.account = account
   }
 
 }

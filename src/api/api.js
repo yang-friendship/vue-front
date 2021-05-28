@@ -1,14 +1,15 @@
 import axios from 'axios'
 import state from "../store/state";
-const DOMAIN = 'http://www.negyahu.ga'
-// const DOMAIN = 'http://localhost:8001'
-
+const DOMAIN = process.env.VUE_APP_SERVER_API
 
 const request = (method, url, data) => {
   return axios({
     method,
     url: DOMAIN + url,
     data,
+    header : {
+      'Content-Type' : 'application/json'
+    }
   });
 }
 
@@ -40,6 +41,10 @@ export const check = {
 export const account = {
   checkEmail(email) {
     return request('get', '/check/email', {email: email})
+  },
+  fetch(id) {
+    console.log("fetch");
+    return request('get',`/api/accounts/${id}`)
   }
 }
 
@@ -58,7 +63,10 @@ export const article = {
     return request('get', `/api/articles/${id}`)
   },
   FETCH_LIST(query){
-    return request('get',`/api/articles?type=${query.type}&keyword=${query.keyword}`)
+    console.log(query);
+    return request('get',
+        // `/api/articles?type=${query.type}&keyword=${query.keyword}&p=${query.p}&s=${query.size}`)
+        `/api/articles`)
   },
   DELETE(id){
     return request('delete', `/api/articles/${id}`);
@@ -67,7 +75,7 @@ export const article = {
 
 export const reply = {
   REGISTER(id,reply) {
-    return request('post', `/api/articles/${id}/replay`,{ reply})
-  }
+    return request('post', `/api/articles/${id}/replay`,{reply})
+  },
 }
 
