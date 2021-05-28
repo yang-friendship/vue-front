@@ -2,10 +2,9 @@ import * as api from "../api/api";
 
 const actions = {
   LOGIN({commit}, {email, password}) {
-    console.log('Login actions');
-    api.login({email: email, password: password})
+    return api.login({email: email, password: password})
     .then(res => {
-      console.log(res.data.token);
+      console.log("status:"+res.status);
       commit('SET_LOGIN_RESULT', res.data.token)
     });
   },

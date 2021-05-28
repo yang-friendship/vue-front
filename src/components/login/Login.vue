@@ -45,12 +45,12 @@ export default {
       const redirectUrl = this.$route.query.rPath || '/'
 
       this.LOGIN({email:this.email, password: this.password})
-      .then(() => {
-        console.log(`redirectUrl: ${redirectUrl}`);
+      .then((res) => {
+        console.log(res);
         this.$router.push(`${redirectUrl}`)
       })
-      .catch(err => {
-        console.error(err)
+      .catch(() => {
+        window.confirm("로그인 실패")
       })
     }
   }
